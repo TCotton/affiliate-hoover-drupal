@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Central file for Affiliate Hoover module
+ */
+
+
+/**
+ * Implementation of hook_help().
+ */
+function affiliate_hoover_help($path, $arg) {
+
+    if ($path == 'admin/help#affiliate_hoover') {
+
+        // Write guide to module here
+
+        return t('Affiliate Hoover help');
+
+    }
+
+} // end function affiliate_hoover_help($path, $arg) {
+
+
+/**
+ * Implements hook_menu().
+ */
+
+function affiliate_hoover_menu() {
+
+    $items['admin/config/affiliate_hoover'] = array(
+        'title' => 'Affiliate Hoover Home page',
+        'page callback' => 'drupal_get_form',
+        'description' => 'This is the affiliate hoover homepage - add shit here',
+        'access arguments' => array('access content'), 
+        'page arguments' => array('affiliate_hoover_first_form'),
+        'file' => 'affiliate_hoover.home.inc',
+        'menu_name' => 'Affiliate Hoover',
+        'type' => MENU_NORMAL_ITEM,
+        );
+
+    // Make "Tab 1" the main tab on the "Foo settings" page
+    $items['admin/config/affiliate_hoover/uniquename/%'] = array(
+        'page callback' => 'affiliate_hoover_unique_name',
+        'access arguments' => array('access content'),
+        'page arguments' => array(4),        
+        'file' => 'affiliate_hoover.uniquename.inc',
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+        'title callback' => 'affiliate_hoover_uniquename_title_callback',
+        'title arguments' => array(4), 
+        // Access callback, page callback, and theme callback will be inherited
+        // from 'admin/config/system/foo', if not specified here to override.
+        );
+        
+     // Make "Tab 1" the main tab on the "Foo settings" page
+    $items['admin/config/affiliate_hoover/uniqueform/%'] = array(
+        'page callback' => 'affiliate_hoover_unique_form',
+        'access arguments' => array('access content'),
+        'page arguments' => array(4),        
+        'file' => 'affiliate_hoover.uniqueform.inc',
+        'type' => MENU_VISIBLE_IN_BREADCRUMB,
+        'title callback' => 'affiliate_hoover_unique_form_title_callback',
+        'title arguments' => array(4), 
+        // Access callback, page callback, and theme callback will be inherited
+        // from 'admin/config/system/foo', if not specified here to override.
+        );
+        
+
+        
+     // Make "Tab 1" the main tab on the "Foo settings" page
+    $items['admin/config/affiliate_hoover/tab1'] = array(
+        'title' => 'Tab 1',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        // Access callback, page callback, and theme callback will be inherited
+        // from 'admin/config/system/foo', if not specified here to override.
+        );
+  
+    // Make an additional tab called "Tab 2" on "Foo settings"
+    $items['admin/config/affiliate_hoover/tab2'] = array(
+        'title' => 'Tab 2',
+        'type' => MENU_DEFAULT_LOCAL_TASK,
+        // Page callback and theme callback will be inherited from
+        // 'admin/config/system/foo', if not specified here to override.
+        // Need to add access callback or access arguments.
+        );
+
+    return $items;
+
+} // end function devel_menu() {

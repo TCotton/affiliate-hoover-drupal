@@ -1,0 +1,199 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the affiliate hoover module.
+ */
+
+
+/**
+ * Implements hook_schema().
+ */
+function affiliate_hoover_schema() {
+
+    $schema = array();
+
+    $schema['ah_feed_details'] = array(
+        'description' => 'A database to use with Affiliate Hoover module',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Key index of database',
+                'type' => 'serial',
+                'not null' => TRUE,
+                ),
+            'name' => array(
+                'description' => 'Name of the affiliate feed',
+                'type' => 'char',
+                'length' => '200',
+                'not null' => TRUE,
+                ),
+            'fileName' => array(
+                'description' => 'Filename as uploaded to the file folder',
+                'type' => 'text',
+                'not null' => TRUE,
+                ),
+             'url' => array(
+                'description' => 'URL of uploaded file',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => TRUE,
+                ),
+            'header_array' => array(
+                'description' => 'CSV headers',
+                'type' => 'text',
+                'not null' => TRUE,
+                ),
+            'header_array_amend' => array(
+                'description' => 'CSV headers with added code for cut and paste entry in admin form',
+                'type' => 'text',
+                'not null' => TRUE,
+                ),
+            'num_rows' => array(
+                'description' => 'Total number of individual entries as rows',
+                'type' => 'int',
+                'not null' => FALSE,
+                ),
+            'min_rows' => array(
+                'description' => 'The row # to begin parsing as specified by the user',
+                'type' => 'int',
+                'not null' => FALSE,
+                ),
+            'max_rows' => array(
+                'description' => 'The row # to end parsing as specified by the user',
+                'type' => 'int',
+                'not null' => FALSE,
+                ),
+            'post_status' => array(
+                'description' => 'for wordpress, move',
+                'type' => 'char',
+                'length' => '25',
+                'not null' => FALSE,
+                ),
+            'form_title' => array(
+                'description' => 'Post entry from code as created by header_array_amend',
+                'type' => 'text',
+                'not null' => FALSE,
+                ),
+            'form_title_contains' => array(
+                'description' => 'Filter for form title',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_title_not_contains' => array(
+                'description' => 'Filter for form title',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_body' => array(
+                'description' => 'Post entry from code as created by header_array_amend',
+                'type' => 'text',
+                'not null' => FALSE,
+                ),
+            'form_body_contains' => array(
+                'description' => 'Post entry from code as created by header_array_amend',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_body_not_contains' => array(
+                'description' => 'Filter for body text',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_body_contains' => array(
+                'description' => 'Filter for body text',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => FALSE,
+                ),
+            'form_body_nofollow' => array(
+                'description' => 'Add nonfollow to external links',
+                'type' => 'int',
+                'length' => 'tiny',
+                'not null' => FALSE,
+                ),
+            'form_categories' => array(
+                'description' => 'Post entry from code as created by header_array_amend',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_categories_contains' => array(
+                'description' => 'Filter for categories',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_categories_not_contains' => array(
+                'description' => 'Filter for categories',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'form_categories_parent' => array(
+                'description' => 'Not sure, maybe remove',
+                'type' => 'char',
+                'length' => '255',
+                'not null' => FALSE,
+                ),
+            'post_type' => array(
+                'description' => 'Drupal content type as specified by the user',
+                'type' => 'char',
+                'length' => '200',
+                'not null' => FALSE,
+                ),
+            'form_allow_comments' => array(
+                'description' => 'Allowing comments on the created posts',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => FALSE,
+                ),
+            'form_promote' => array(
+                'description' => 'Promote to frontpage',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => FALSE,
+                ),
+            ),
+        'primary key' => array('id'),
+        'unique keys' => array('name' => array('name')),
+        );
+        
+        
+        
+        $schema['ah_total_feeds'] = array(
+  'description' => 'Creates a record of every individual node created',
+  'fields' => array(
+    'id' => array(
+      'description' => 'id',
+      'type' => 'serial',
+      'not null' => TRUE,
+    ),
+    'cat_id' => array(
+      'description' => 'ID of feed type',
+      'type' => 'int',
+      'not null' => TRUE,
+    ),
+    'post_title_id' => array(
+      'description' => 'Unique key for title id',
+      'type' => 'int',
+      'not null' => TRUE,
+    ),
+  ),
+  'primary key' => array('id'),
+);
+
+    return $schema;
+
+} //function affiliate_hoover_schema() {
+
+
+/**
+ * Implementation of hook_uninstall(),
+ */
+function affiliate_hoover_uninstall() {
+
+}

@@ -1,0 +1,14 @@
+
+name = Affiliate Hoover
+description = A Drupal module for parsing CSV files used in affiliate marketing
+core = 7.x
+configure = admin/config/affiliate_hoover
+version = dev
+package = Affiliate Marketing
+files[] = affiliate_hoover.install
+files[] = libs/DataSource.php
+files[] = affiliate_hoover.module
+files[] = affiliate_hoover.test
+
+;dependencies[] = autoload
+;php = 5.3

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Tests for the first module
+ */
+
+class FirstTestCase extends DrupalWebTestCase {
+
+    public function setUp() {
+        parent::setUp();
+    }
+
+
+}
+
+
